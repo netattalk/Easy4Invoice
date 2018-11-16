@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="invoice">
+    <meta name="author" content="net@talk GmbH">
+    <link rel="icon" href="icon.PNG">
+
+    <title>Rechnung</title>
+
+    <link href="lib/bootstrap-3.3.7/dist/css/bootstrap.css" rel="stylesheet">
+    <!--<link href="lib/bootstrap-3.3.7/dist/css/dashboard.css" rel="stylesheet">!-->
+    <link href="lib/bootstrap-3.3.7/dist/css/custom.css" rel="stylesheet">
+
+
+	<!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>!-->
+	<script src="lib/bootstrap-3.3.7/dist/js/jquery.min.1.12.4.js"></script>
+	<script src="lib/js/main.js"></script>
+	<script src="lib/js/jquery/jquery-3.3.1.min.js"></script>
+  <script src="lib/js/jquery/jquery-ui.min.js"></script>
+	<script src="lib/js/XML.js"></script>
+	<script src="lib/js/search.js"></script>
+	<script src="lib/js/moment.js"></script>
+
+  </head>
+
+  <body>
+
+  <div id="testprint">
+	<div class="container-fluid">
+      <div class="row">
+          <div id="topdiv" class="col-sm-10 col-md-8 col-lg-6 col-sm-offset-1 col-md-offset-2 col-lg-offset-3">
+
+            <div class="row">
+				<div id="settings" class="col-sm-3 col-md-3 col-lg-3 text-left dontPrint">
+
+					<button type="button" class="btn btn-default" onclick="settings()" aria-label="Left Align">
+						<span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span>
+					</button>
+
+					<button id="new" type="button" value="New" onclick="storage('new')" class="btn btn-default">
+						<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+					</button>
+				</div>
+
+				<div class="col-sm-1 col-md-1 col-lg-1 dontPrint">
+					<button id="searchSubmit" name="searchSubmit" type="button" class="btn btn-default" onclick="arraySearch()">
+						<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+					</button>
+				</div>
+
+				<div class="col-xs-4 col-sm-3 col-md-5 col-lg-5 dontPrint">
+					<input id="searchhistory" name="searchhistory" type="text" class="form-control text-left" list="datalist_search">
+				</div>
+
+				<div id="history" class="jumbotron col-sm-11 col-md-11 col-lg-11 text-left">
+
+					<div class="col-sm-3 col-md-3 col-lg-3">
+						<p id="countInvoices"></p>
+						<button id="minus" type="button" value="Älter" onclick="storage('-1')" class="btn btn-default">
+						<span class="glyphicon glyphicon-backward" aria-hidden="true"></span></button>
+						<button id="plus" type="button" value="Neuer" onclick="storage('+1')" class="btn btn-default">
+						<span class="glyphicon glyphicon-forward" aria-hidden="true"></span></button>
+
+					</div>
+
+					<div class="col-sm-7 col-md-7 col-lg-7">
+						<label for="myInput">Ordner mit XML files auswählen</label>
+						<input id="myInput" type="file" webkitdirectory directory multiple/><br>
+					</div>
+
+					<div class="col-sm-5 col-md-5 col-lg-5">
+						<label for="upload">Verlauf aus XML Generieren</label>
+						<button id="upload" type="button" value="Cache erzeugen" class="btn btn-default" onclick="buildCache()">
+						<span class="glyphicon glyphicon-level-up" aria-hidden="true"></span></button>
+					</div>
+
+				</div>
+
+
+				<div class="header">
+					<div class="row">
+						<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-right">
+						</div>
+					</div>
+				</div>
+
+			</div>
+
+			<div class="row">
+				<form action="" name="invoiceform" id="invoiceform" method="post" enctype="multipart/form-data">
+				<input type="hidden" value="1" id="counterInvoices">
+				<input type="hidden" value="1" id="qty">
+
+				<div id="leftheader" class="col-xs-7 col-sm-6 col-md-6 col-lg-6">
+					<table class="table" style="background-color:#fff;">
+				        <tr><td style="border:none"><p contenteditable="true" id="rechnungssteller" style="font-size: 10px; text-decoration: underline;">net@talk GmbH Johannisstr. 24 D-84034 Landshut</p></td></tr>
+						<tr><td><input type="text" id="customer0" name="customer0" list="datalist_customer0" class="form-control"></td></tr>
+						<tr><td><input type="text" id="customer1" name="customer1" class="form-control"></td></tr>
+						<tr><td><input type="text" id="customer2" name="customer2" class="form-control"></td></tr>
+						<tr><td><input type="text" id="customer3" name="customer3" class="form-control"></td></tr>
+						<tr><td><input type="text" id="customer4" name="customer4" class="form-control"></td></tr>
+					</table>
+				</div>
+
+				<div class="col-lg-offset-1 col-xs-5 col-sm-5 col-md-5 col-lg-5">
+					<input type="file" name="file" id="file" class="inputfile img-responsive pull-right" accept="image/*" src="logo.jpg"/>
+					<label for="file">
+						<img id="logo" src="logo.jpg" class="img-responsive pull-right" alt="Image preview..."></label>
+
+					<table class="table">
+						<tr><td id="header0" contenteditable="true" >Rechnungsnr.:</td><td><input type="text" class="form-control" name="invoicenr" id="invoicenr" list="datalist_invoicenr"></td></tr>
+          				<tr><td id="header1" contenteditable="true" >Kundennr.:</td><td><input type="text" class="form-control" name="customernr" id="customernr" list="datalist_customernr"></td></tr>
+						<tr><td id="header2" contenteditable="true" >Datum:</td><td><input type="text" class="form-control" name="invoicedate" id="invoicedate" list="datalist_invoicedate" ></td></tr>
+          				<tr><td id="header3" contenteditable="true" >Zahlungsziel:</td><td><input type="text" class="form-control" name="paymenttarget" id="paymenttarget" list="datalist_paymenttarget"></td></tr>
+						<tr><td id="header4" contenteditable="true" >Bankverbindung:</td><td><textarea name="IBAN" id="IBAN" class="form-control"  rows="4"></textarea></td></tr>
+					</table>
+				</div>
+			</div>
+
+		<div class="row">
+			<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+				<p contenteditable="true" class="text-left">
+				<font size="5em"><strong id="head">Rechnung</strong></font></p>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-sm-12 col-md-12 col-lg-12">
+				<p contenteditable="true" id="notesOverTable" >Amtsgericht/UmST.:
+				</p>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+				<table id="dataTable" class="table table-responsive printtable" style="margin-bottom:0px;background-color:#fff;">
+					<thead>
+						<tr>
+						<th class="left-cells">Select</th>
+						<th id="table0" contenteditable="true" >Position</th>
+						<th id="table1" contenteditable="true" >Artikel</th>
+						<th id="table2" contenteditable="true" >Menge</th>
+						<th id="table3" contenteditable="true" >Einzelpreis</th>
+						<th id="table4" contenteditable="true"  formula="cost*qty" summary="sum">Gesamtpreis</th>
+						</tr>
+					</thead>
+
+					<div class="customfooter">
+						<tfoot id="footer">
+							<tr id="AddandDeleteRow"><td colspan="6" style="border-bottom:none"><input type="button" value="hinzufügen" onclick="addTable(+1)" class="btn btn-sm btn-success"></td></tr>
+
+							<div id="divfooter">
+								<tr><td colspan="1" class="left-cells" style="border:none">&nbsp;</td><td colspan="3" class="left-cells" style="border:none">&nbsp;</textarea></td><td contenteditable="true" >Nettobetrag</td><td><span class="input-euro right"><input type="text" name="net" class="form-control text-right" readonly="readonly" value="0.00" id="net"></span></td></tr>
+								<tr><td colspan="1" class="left-cells" style="border:none">&nbsp;</td><td colspan="3" class="left-cells" style="border:none">&nbsp;</td><td contenteditable="true" >UmSt</td><td><span class="input-euro right"><input type="text" name="tax" class="form-control text-right" readonly="readonly" value="0.00" id="tax"></span></td></tr>
+								<tr><td colspan="1" class="left-cells" style="border:none">&nbsp;</td><td colspan="3" class="left-cells" style="border:none">&nbsp;</td><td contenteditable="true" >Gesamtbetrag</td><td><span class="input-euro right"><input type="text" name="total" class="form-control text-right" readonly="readonly" value="0.00" id="total"></span></td></tr>
+							</div>
+						</tfoot>
+					</div>
+					<tbody id="tablebody">
+						<tr id="1">
+							<td class="left-cells"><a href="javascript:return false;" class="del-href" onclick="deleteRow(1);calculate(this);"><button type="button" class="btn btn-sm btn-danger"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button></a></td>
+							<td id="displaynum_1" class="text-center displaynum">1</td>
+							<td><input type="text" id="item_1" class="form-control item-title" name="item_1"> <textarea id="description_1" name="description_1" class="form-control" cols="120"></textarea></td>
+							<td><input type="text" id="qty_1" class="form-control" name="qty_1" value="1" onchange="calculate(this,1 )"></td>
+							<td>
+								<span class="input-euro right"><input type="text" id="cost_1" class="form-control text-right" name="cost_1" value="0.00" onchange="calculate(this, 1)"></span><input type="hidden" id="dsc_1" class="form-control text-right" name="dsc_1" value="0.00" readonly><a  href="javascript:return false;" class="href-discount" onclick="showDiscount(1)">-Rabatt</a>
+								<div id="discount_1" class="discountUI" style="display:none">
+								<table>
+									<tbody>
+										<tr><td>&nbsp;</td><td>&nbsp;</td><td align="right"><a href="javascript:return false;" onclick="hideDiscount(1)">X</a></td></tr>
+										<tr><td><input type="radio" name="dc_1" onclick="noDiscount('no',1);calculate(this,1);" checked=""></td><td>Kein Rabatt</td><td>&nbsp;</td></tr>
+										<tr><td><input type="radio" name="dc_1" onclick="noDiscount('yes',1)"></td><td>% des Preises </td><td><input type="text" name="prcdiscount_1" id="prcdiscount_1" class="prcdiscount" onchange="calculate(this,1)" maxlength="5" readonly=""></td></tr>
+									</tbody>
+								</table>
+								</div>
+								<input type="hidden" name="discountv_1" id="discountv_1" value="">
+							</td>
+							<td><span class="input-euro right"><input type="text" id="price_1" class="form-control text-right" name="price_1" value="0.00" readonly="readonly"></span> </td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-sm-12 col-md-12 col-lg-12"><p contenteditable="true" id="notizen" >Notizen
+			</p>
+			</div>
+				<input onclick="makeInvoice()" type="button" name="submit_invoice" id="submit_invoice" value="Rechnung erstellen" class="btn btn-sm btn-success" >
+			 </form>
+		</div>
+
+		<datalist id="datalist1">
+		</datalist>
+
+		</div>
+	   </div>
+	  </div>
+	 </div>
+	</div>
+  </div>
+
+	<script src="lib/js/storage.js"></script>
+
+  </body>
+</html>

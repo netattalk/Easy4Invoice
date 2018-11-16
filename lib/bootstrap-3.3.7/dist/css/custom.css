@@ -1,0 +1,383 @@
+body{
+	padding-top:50px;
+	padding-bottom:50px;
+	background-color:#dedede;
+}
+
+#topdiv{
+	background-color:#fff;
+	padding-top:20px !important;
+	padding-bottom:20px !important;
+	padding-left:20px !important;
+	padding-right:20px !important;
+}
+
+
+#leftheader{
+	padding-top:100px;
+	padding-left: 50px;
+}
+
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content/Box */
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto; /* 15% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%; /* Could be more or less, depending on screen size */
+}
+
+
+.inputfile {
+	width: 0.1px;
+	height: 0.1px;
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+	z-index: -1;
+}
+
+.inputfile + label {
+	cursor: pointer; /* "hand" cursor */
+}
+
+.inputfile:focus + label,
+.inputfile + label:hover {
+    background-color: #c5bfbf;
+}
+
+
+.discountUI{
+	border:3px solid #CCCCCC !important;
+	width:180px;
+	padding:5px;
+	position:absolute;
+	background-color:#FFFFFF !important;
+	display:none;
+	}
+
+	.nodiscount{
+		width:40px;
+	}
+
+	.prcdiscount{
+		width:40px;
+	}
+
+.rowedit{
+	background-color:#fff;
+	border:1px solid #c1bfbf;
+	padding:10px;
+
+}
+
+.rowa{
+margin-top:15px;
+margin-bottom:15px;
+}
+
+.rowb{
+background-color:#fff;
+padding:10px;
+border:1px solid #c1bfbf;
+}
+
+.rowb-right{
+background-color:#fff;
+padding-left:10px;
+border:1px solid #c1bfbf;
+}
+
+.rowright{
+	padding-right:0px;
+}
+.customer{
+background-color:#3cc787;
+width:100px;
+height:100px;
+font-size:90px;
+float:left;
+
+}
+
+.customertitle{
+padding-left:10px;
+float:left;
+}
+
+.customertitle h2{
+margin-top:0px;
+}
+
+.ralign{
+text-align:right;
+}
+
+.calign{
+text-align:center;
+}
+
+
+
+.form-control {
+	font-size: 13px !important;
+}
+
+#leftheader input{
+	height:25px;
+}
+#tablebody input{
+	height:25px;
+}
+
+/* css counter */
+body {
+  font-size: 13px !important;
+  counter-reset: page;                     /* Set a counter named 'section', and its initial value is 0. */
+
+}
+
+
+h3::before {
+  counter-increment: pgae;                 /* Increment the value of section counter by 1 */
+  content: counter(page);                  /* Display the value of section counter */
+}
+
+.table > tbody > tr > td{
+	padding:0px;
+	border-top:0;
+}
+
+
+.background {
+	display:none;
+}
+
+
+#tablebody {
+	border-collapse:collapse;
+}
+#tablebody td {
+	padding:7px; border:#4e95f4 1px solid;
+}
+#tablebody tr {
+	background: white;
+}
+#tablebody tr:hover {
+	background-color:#e0dbdb;
+	cursor:row-resize;
+}
+#tablebody tr:hover > .left-cells {
+	background-color:#e0dbdb;
+	visibility:visible;
+}
+#history{
+	display:none;
+	background-color:white;
+	border:1px solid;
+}
+
+
+.left-cells {
+	visibility:collapse;
+	background:yellow;
+}
+
+table#dataTable tbody td {
+	border:1px solid #bdbaba;
+}
+table#dataTable thead tr {
+	border:1px solid #bdbaba;
+}
+table#dataTable thead th {
+	border:1px solid #bdbaba;
+}
+table#dataTable .discountUI tbody td{
+	border:0.5px solid white;
+}
+table#dataTable .discountUI tbody tr{
+	border:0.5px solid white;
+}
+table#dataTable .discountUI tbody th{
+	border:0.5px solid white;
+}
+textarea {
+  resize: none;
+}
+
+@media print {
+
+#rechnungssteller {
+	font-size: 8px !important;
+}
+
+body {
+  font-size: 11px !important;
+  counter-reset: page;                     /* Set a counter named 'section', and its initial value is 0. */
+
+}
+.form-control {
+	font-size: 11px !important;
+}
+
+table#dataTable tbody td {
+	border:1px solid black;
+}
+table#dataTable thead tr {
+	border:1px solid black;
+}
+table#dataTable thead th {
+	border:1px solid black;
+}
+table#dataTable tfoot td {
+	border:1px solid black;
+}
+table#dataTable tfoot tr {
+	border:1px solid black ;
+}
+table#dataTable tfoot th {
+	border:1px solid black ;
+}
+table#dataTable .left-cells {
+	border:opx solid white !important;
+}
+
+@page {
+	size: A4;
+}
+
+@page :left {
+	margin: 1cm;
+	@top-right {
+		content: #header;
+
+	}
+}
+
+@page :right {
+	margin: 1cm;
+	@bottom-right {
+		content: "Page " counter(page) " of " counter(pages);
+	}
+
+}
+@page :header {
+
+}
+#empfaenger,
+#buttonempfaenger{
+	display:none;
+}
+
+.dontPrint{
+	display:none;
+}
+
+
+#dontPrint{
+	display:none;
+}
+#history, #settings{
+	display:none !important;
+}
+
+#invoiceform {
+	display:block;
+	position:relativ;
+	top:5em;
+}
+
+#divfooter{
+	page-break-before:always !important;
+	page-break-inside:avoid !important;
+	display:block;
+    position:absolute;
+    bottom:-12em;
+	right:0;
+}
+#footer{
+	page-break-before:always;
+	page-break-inside:avoid;
+	display:block;
+    position:absolute;
+    bottom:-14em;
+	right:0;
+}
+
+#tablebody {
+	margin-bottom:2em;
+
+}
+
+
+
+
+.del-href {
+  display: none;
+}
+
+#AddandDeleteRow{
+	display: none;
+}
+
+#submit_invoice{
+	display: none;
+}
+
+.left-cells{
+	display: none;
+}
+
+input,
+textarea {
+	border: none !important;
+	box-shadow: none !important;
+	outline: none !important;
+}
+
+.item-title{
+	fong-weight:bold;
+}
+
+.href-discount{
+	display: none;
+}
+
+#footer{
+	/*display: none;*/
+}
+
+a[href]:after { content: none !important; }
+
+#testp {
+			 display: block;
+			 width:100%;
+			 position:absolute;
+			 left:2;
+			 top:0;
+			 font-size:20pt;
+	 }
+
+}
+
+@page {
+	size: auto;
+	margin: 0mm;
+}
+
+@page:first{
+
+}

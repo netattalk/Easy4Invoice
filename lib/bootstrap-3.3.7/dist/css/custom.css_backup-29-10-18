@@ -1,0 +1,134 @@
+.discountUI{
+	border:3px solid #CCCCCC;
+	width:180px;
+	padding:5px;
+	position:absolute;
+	background-color:#FFFFFF;
+	display:none;
+	}
+
+	.nodiscount{
+		width:40px;
+	}
+
+	.prcdiscount{
+		width:40px;
+	}
+
+.rowedit{
+	background-color:#fff;
+	border:1px solid #c1bfbf;
+	padding:10px;
+
+}
+
+.rowa{
+margin-top:15px;
+margin-bottom:15px;
+}
+
+.rowb{
+background-color:#fff;
+padding:10px;
+border:1px solid #c1bfbf;
+}
+
+.rowb-right{
+background-color:#fff;
+padding-left:10px;
+border:1px solid #c1bfbf;
+}
+
+.rowright{
+	padding-right:0px;
+}
+.customer{
+background-color:#3cc787;
+width:100px;
+height:100px;
+font-size:90px;
+float:left;
+
+}
+
+.customertitle{
+padding-left:10px;
+float:left;
+}
+
+.customertitle h2{
+margin-top:0px;
+}
+
+.ralign{
+text-align:right;
+}
+
+.calign{
+text-align:center;
+}
+
+.add-euro:after{
+	/*content:"€";*/
+}
+
+
+@media print {
+	
+
+
+.del-href {
+  display: none;
+}
+
+#AddandDeleteRow{
+	display: none;
+}
+
+#submit_invoice{
+	display: none;
+}
+
+.left-cells{
+	display: none;
+}
+
+input,
+textarea {
+	border: none !important;
+	box-shadow: none !important;
+	outline: none !important;
+}
+
+.item-title{
+	fong-weight:bold;
+}
+
+.href-discount{
+	display: none;
+}
+
+#footer{
+	/*display: none;*/
+}
+
+a[href]:after { content: none !important; }
+
+#testp {
+			 display: block;
+			 width:100%;
+			 position:absolute;
+			 left:0;
+			 bottom:0;
+	 }
+
+}
+
+@page {
+	size: auto;
+	margin: 0mm;
+}
+
+@page:first{
+
+}
